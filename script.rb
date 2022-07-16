@@ -20,6 +20,10 @@ attr_accessor :name, :symbol
     $game_board[row][column] = @symbol
     p $game_board
   end
+  
+  def your_turn
+    p "#{@name} it's your turn! Please input your desired row and press enter, then input your desired column and press enter"
+  end 
 end
 
 Board.new
@@ -27,6 +31,9 @@ p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
 
 for i in 1...5
+johnny.your_turn()
 johnny.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
+
+bob.your_turn()
 bob.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
 end
