@@ -17,7 +17,7 @@ class Player
   end
 
   def select_row
-    p "#{@name} it's your turn! Please input your desired row and press enter"
+    p "#{@name} it's your turn! Please input your desired row (0-2) and press enter"
     @row = gets.chomp.to_i
     if @row < 3 && @row >= 0
       @row = row
@@ -27,7 +27,7 @@ class Player
   end
 
   def select_column
-    p "great choice #{@name}! Next, please enter your desired column and press enter"
+    p "great choice #{@name}! Next, please enter your desired column (0-2) and press enter"
     @column = gets.chomp.to_i
     if @column < 3 && @column >= 0
       @column = column
@@ -55,8 +55,7 @@ class Player
        $game_board[0][0] == @symbol && $game_board[1][1] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[2][0] == @symbol && $game_board[1][1] == @symbol && $game_board[0][2] == @symbol
 
-      p "Congratulations #{@name}! You are the winner! The board will now reset if you would like to play again!"
-      p $game_board = Board.new
+      p "Congratulations #{@name}! You are the winner! Start a new game if you would like to play again."
     end
   end
 
@@ -72,7 +71,16 @@ Board.new
 p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
 
-for i in 0...$game_board.length
+i = 0
+while i < 9
   johnny.play_round
+  break if johnny.winner?
+
+  i += 1
+  break if i == 9
+
   bob.play_round
+  break if bob.winner?
+
+  i += 1
 end
