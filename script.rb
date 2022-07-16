@@ -9,21 +9,41 @@ class Board
 end
 
 class Player
-attr_accessor :name, :symbol
+attr_accessor :name, :symbol, :row, :column
 
   def initialize (name, symbol)
   @name = name
   @symbol = symbol
   end
+ 
+  def select_row
+    p "#{@name} it's your turn! Please input your desired row and press enter"
+    if gets.chomp.to_i < 3 && gets.chomp.to_i >= 0
+      @row = gets.chomp.to_i
+      @row = row
+    else self.select_row
+    end
+  end
+
+  def select_column
+    p "great choice #{@name}! Next, please enter your desired column and press enter"
+    if gets.chomp.to_i < 3 && gets.chomp.to_i >= 0
+      @column = gets.chomp.to_i
+      @column = column
+    else self.select_column
+    end
+  end
 
   def place_symbol(row, column)
-    $game_board[row][column] = @symbol
-    p $game_board
+  $game_board[row][column] = @symbol
+  p $game_board
   end
-  
-  def your_turn
-    p "#{@name} it's your turn! Please input your desired row and press enter, then input your desired column and press enter"
-  end 
+
+  def play_round
+  self.select_row()
+  self.select_column()
+  self.place_symbol(row, column)
+  end
 end
 
 Board.new
@@ -31,9 +51,6 @@ p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
 
 for i in 1...5
-johnny.your_turn()
-johnny.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
-
-bob.your_turn()
-bob.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
+johnny.play_round()
+bob.play_round()
 end
