@@ -39,12 +39,6 @@ attr_accessor :name, :symbol, :row, :column
   p $game_board
   end
 
-  def play_round
-  self.select_row()
-  self.select_column()
-  self.place_symbol(row, column)
-  end
-
   def winner?
     if $game_board[0][0] == @symbol && $game_board[0][1] == @symbol && $game_board[0][2] == @symbol ||
        $game_board[0][0] == @symbol && $game_board[1][0] == @symbol && $game_board[2][0] == @symbol ||
@@ -55,20 +49,25 @@ attr_accessor :name, :symbol, :row, :column
        $game_board[0][0] == @symbol && $game_board[1][1] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[2][0] == @symbol && $game_board[1][1] == @symbol && $game_board[0][2] == @symbol 
 
-       p "Congratulations #{@name}! You are the winner! The board will now reset if you would like to play again"
+       p "Congratulations #{@name}! You are the winner! The board will now reset if you would like to play again!"
        p $game_board = Board.new
-       true
-    end
+   end
   end
+end
+
+public 
+def play_round
+  self.select_row()
+  self.select_column()
+  self.place_symbol(row, column)
+  self.winner?
 end
 
 Board.new
 p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
 
-until johnny.winner? || bob.winner? == true
+until johnny.winner? == true || bob.winner? == true 
 johnny.play_round()
-johnny.winner?
 bob.play_round()
-bob.winner?
 end
