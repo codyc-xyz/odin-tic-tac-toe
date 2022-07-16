@@ -54,7 +54,8 @@ class Player
        $game_board[0][2] == @symbol && $game_board[1][2] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[0][0] == @symbol && $game_board[1][1] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[2][0] == @symbol && $game_board[1][1] == @symbol && $game_board[0][2] == @symbol
-      true
+       
+      "Congratulations #{@name}! You are the winner! Start a new game if you would like to play again."
     end
   end
 
@@ -74,7 +75,7 @@ i = 0
 while i < 9
   johnny.play_round
   if johnny.winner?
-    p 'Congratulations Johnny! You are the winner! Start a new game if you would like to play again.'
+    p johnny.winner?
     break
   end
 
@@ -86,7 +87,7 @@ while i < 9
 
   bob.play_round
   if bob.winner?
-    p 'Congratulations Bob! You are the winner! Start a new game if you would like to play again.'
+    p bob.winner?
     break
   end
   i += 1
