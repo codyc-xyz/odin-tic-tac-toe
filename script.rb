@@ -12,11 +12,18 @@ class PlayerTwo
 end
 
 module PlaceX
-
+include ChoosePosition
+board[subarray,position] = "X"
 end
 
 module PlaceO
-
+include ChoosePosition
+board[subarray,position] = "O"
 end
 
-board = [[nil, nil, nil][nil, nil, nil][nil, nil, nil]]
+module ChoosePosition(subarray, position)
+
+end
+board = [[nil, nil, nil]
+        [nil, nil, nil]
+        [nil, nil, nil]]
