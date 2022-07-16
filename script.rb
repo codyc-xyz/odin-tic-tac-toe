@@ -25,5 +25,8 @@ end
 Board.new
 p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
-bob.place_symbol(0, 1)
 
+for i in 1...5
+johnny.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
+bob.place_symbol(row = gets.chomp.to_i, column = gets.chomp.to_i)
+end
