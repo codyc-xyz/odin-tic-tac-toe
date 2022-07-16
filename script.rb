@@ -3,8 +3,8 @@ require 'pry-byebug'
 
 class Board
   def initialize (rows = 3, columns = 3)
-  game_board = Array.new(rows) {Array.new(columns)}
-  p game_board
+  $game_board = Array.new(rows) {Array.new(columns)}
+  p $game_board
   end
 end
 
@@ -15,9 +15,15 @@ attr_accessor :name, :symbol
   @name = name
   @symbol = symbol
   end
+
+  def place_symbol(row, column)
+    $game_board[row][column] = @symbol
+    p $game_board
+  end
 end
 
 Board.new
 p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
+bob.place_symbol(0, 1)
 
