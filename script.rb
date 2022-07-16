@@ -1,6 +1,3 @@
-# players take turns placing either an X or an O onto nil spaces on a 3x3 grid until one gets three in a row/across or the board is filled
-require 'pry-byebug'
-
 class Board
   def initialize(rows = 3, columns = 3)
     $game_board = Array.new(rows) { Array.new(columns) }
@@ -54,7 +51,7 @@ class Player
        $game_board[0][2] == @symbol && $game_board[1][2] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[0][0] == @symbol && $game_board[1][1] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[2][0] == @symbol && $game_board[1][1] == @symbol && $game_board[0][2] == @symbol
-       
+
       "Congratulations #{@name}! You are the winner! Start a new game if you would like to play again."
     end
   end
