@@ -5,6 +5,7 @@ board = [[nil, nil, nil],
          [nil, nil, nil]]
 
 class PlayerOneMove
+  include GetInput
   def initialize(vertical, horizontal)
     @vertical = vertical
     @horizontal = horizontal
@@ -13,6 +14,7 @@ class PlayerOneMove
 end
 
 class PlayerTwoMove
+  include GetInput
   def initialize(vertical, horizontal)
     @vertical = vertical
     @horizontal = horizontal
@@ -21,7 +23,7 @@ class PlayerTwoMove
 end
 
 for i in 0...board.length
-  PlayerOneMove.new()
-  PlayerTwoMove.new()
+  PlayerOneMove.new(vertical = gets.chomp, horizontal = gets.chomp)
+  PlayerTwoMove.new(vertical = gets.chomp, horizontal = gets.chomp)
   p board
 end
