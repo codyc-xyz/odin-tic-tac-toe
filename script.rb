@@ -1,35 +1,23 @@
-# players take turns placing either an X or an O until one gets three in a row/across or the board is filled
+# players take turns placing either an X or an O onto nil spaces on a 3x3 grid until one gets three in a row/across or the board is filled
+require 'pry-byebug'
 
-$board = [[Array.new(3) { Array.new(3)}]]
-
-module AlterBoard
-  def place_move(vertical, horizontal)
-    @vertical = vertical
-    @horizontal = horizontal
-    $board[vertical.to_i, horizontal.to_i] = 'X'
+class Board
+  def initialize (rows = 3, columns = 3)
+  game_board = Array.new(rows) {Array.new(columns)}
+  p game_board
   end
 end
 
-class Player 
-  include AlterBoard
-end
-class PlayerOneMove < Player
-end
+class Player
+attr_accessor :name, :symbol
 
-class PlayerTwoMove < Player
- def place_move(vertical,horizontal)
-  @vertical = vertical
-  @horizontal = horizontal
-  $board[vertical.to_i, horizontal.to_i] = 'O'
- end
+  def initialize (name, symbol)
+  @name = name
+  @symbol = symbol
+  end
 end
 
-for i in 0...5
-  p1_move = PlayerOneMove.new
-  p1_move.place_move(vertical = gets.chomp, horizontal = gets.chomp)
+Board.new
+p johnny = Player.new('Johnny', 'X')
+p bob = Player.new('Bob', 'O')
 
-  p2_move = PlayerTwoMove.new
-  p2_move.place_move(vertical = gets.chomp, horizontal = gets.chomp)
-
-  p $board
-end
