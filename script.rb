@@ -77,7 +77,10 @@ while i < 9
   break if johnny.winner?
 
   i += 1
-  break if i == 9
+  if i == 9
+    p 'This game has ended in a draw. Start a new game if you would like to play again'
+    break
+  end
 
   bob.play_round
   break if bob.winner?
