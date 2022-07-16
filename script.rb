@@ -4,37 +4,24 @@ board = [[nil, nil, nil],
         [nil, nil, nil],
         [nil, nil, nil]]
 
-class PlayerOne
-  include PlaceX.blue
-  include PlaceO.blue
 
-end
-
-class PlayerTwo
-  include PlaceX.red
-  include PlaceO.red
-  
-end
-
-module PlaceX
-include Input
-  def placex(subarray, position)
-
-  board[subarray, position] = "X"
-end
-end
-
-module PlaceO
-  include Input
-  def placeo(subarray, position)
-  board[subarray, position] = "O"
+class PlayerOneMove
+  def initialize(vertical, horizontal)
+    @vertical = vertical
+    @horizontal = horizontal
+    board[vertical, horizontal] = "X"
   end
 end
 
-module Input
-  def prompt(*args)
-    print(*args)
-    gets
+class PlayerTwoMove
+  def initialize(vertical, horizontal)
+    @vertical = vertical
+    @horizontal = horizontal
+    board[vertical, horizontal] = "O"
+  end
 end
-end
+
+PlayerOneMove.new()
+
+PlayerTwoMove.new()
 
