@@ -35,8 +35,12 @@ attr_accessor :name, :symbol, :row, :column
   end
 
   def place_symbol(row, column)
+  if $game_board[row][column] == nil 
   $game_board[row][column] = @symbol
   p $game_board
+  else
+    self.play_round
+  end
   end
 
   def winner?
@@ -53,21 +57,20 @@ attr_accessor :name, :symbol, :row, :column
        p $game_board = Board.new
    end
   end
-end
-
-public 
+ 
 def play_round
   self.select_row()
   self.select_column()
   self.place_symbol(row, column)
   self.winner?
 end
+end
 
 Board.new
 p johnny = Player.new('Johnny', 'X')
 p bob = Player.new('Bob', 'O')
 
-until johnny.winner? == true || bob.winner? == true 
+for i in 0...$game_board.length
 johnny.play_round()
 bob.play_round()
 end
