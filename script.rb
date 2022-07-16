@@ -18,8 +18,8 @@ attr_accessor :name, :symbol, :row, :column
  
   def select_row
     p "#{@name} it's your turn! Please input your desired row and press enter"
-    if gets.chomp.to_i < 3 && gets.chomp.to_i >= 0
       @row = gets.chomp.to_i
+      if @row < 3 && @row >= 0
       @row = row
     else self.select_row
     end
@@ -27,8 +27,8 @@ attr_accessor :name, :symbol, :row, :column
 
   def select_column
     p "great choice #{@name}! Next, please enter your desired column and press enter"
-    if gets.chomp.to_i < 3 && gets.chomp.to_i >= 0
       @column = gets.chomp.to_i
+      if @column < 3 && @column >= 0
       @column = column
     else self.select_column
     end
