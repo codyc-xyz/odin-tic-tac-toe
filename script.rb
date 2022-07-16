@@ -9,7 +9,7 @@ class Board
 end
 
 class Player
-  attr_accessor :name, :symbol, :row, :column
+  attr_reader :name, :symbol, :row, :column
 
   def initialize(name, symbol)
     @name = name
@@ -54,8 +54,7 @@ class Player
        $game_board[0][2] == @symbol && $game_board[1][2] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[0][0] == @symbol && $game_board[1][1] == @symbol && $game_board[2][2] == @symbol ||
        $game_board[2][0] == @symbol && $game_board[1][1] == @symbol && $game_board[0][2] == @symbol
-
-      p "Congratulations #{@name}! You are the winner! Start a new game if you would like to play again."
+      true
     end
   end
 
@@ -74,7 +73,10 @@ p bob = Player.new('Bob', 'O')
 i = 0
 while i < 9
   johnny.play_round
-  break if johnny.winner?
+  if johnny.winner?
+    p 'Congratulations Johnny! You are the winner! Start a new game if you would like to play again.'
+    break
+  end
 
   i += 1
   if i == 9
@@ -83,7 +85,9 @@ while i < 9
   end
 
   bob.play_round
-  break if bob.winner?
-
+  if bob.winner?
+    p 'Congratulations Bob! You are the winner! Start a new game if you would like to play again.'
+    break
+  end
   i += 1
 end
