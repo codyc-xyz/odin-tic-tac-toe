@@ -18,6 +18,19 @@ class Player
       row
   end
 
+  def select_column
+    puts "#{self.name} it's your turn! Please input your desired column (1-3) and press enter"
+    column = gets.to_i
+      if column < 4 && column > 0
+        puts "great choice #{self.name}, you have selected #{column}"
+        column -= 1 
+      else
+        puts "that's an invalid choice #{self.name}, please input a number between 1-3"
+        select_column
+      end
+      column
+  end
+
 end
 
 class TicTacToe
@@ -38,10 +51,13 @@ class TicTacToe
     @player_two.select_row
   end
 
-  def player_one_
-
+  def player_one_select_column
+    @player_one.select_column
   end
-   
+
+  def player_two_select_column
+    @player_two.select_column
+  end
 end
 
 
