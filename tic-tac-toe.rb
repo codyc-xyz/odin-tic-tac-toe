@@ -34,10 +34,14 @@ class Player
 end
 
 class TicTacToe
-  attr_reader :player_one, :player_two
+  attr_reader :player_one, :player_two, :player_one_name, :player_one_symbol, :player_two_name, :player_two_symbol
   attr_accessor :board
   
   def initialize (player_one_name, player_one_symbol, player_two_name, player_two_symbol)
+    @player_one_name = player_one_name
+    @player_one_symbol = player_one_symbol
+    @player_two_name = player_two_name
+    @player_two_symbol = player_two_symbol
     @player_one = Player.new(player_one_name, player_one_symbol)
     @player_two = Player.new(player_two_name, player_two_symbol)
     @board = Array.new(3) {Array.new(3)}
@@ -58,6 +62,19 @@ class TicTacToe
   def player_two_select_column
     @player_two.select_column
   end
+
+  def player_one_place_symbol 
+    player_one_row = self.player_one_select_row
+    player_one_column = self.player_one_select_column
+
+    if @board[player_one_row][player_one_column].nil?
+      @board[player_one_row][player_one_column] = @player_one_symbol
+      puts "#{@board}"
+    else
+      puts 'That board position is already full, please select an empty position'
+      puts "#{@board}"
+      player_one_place_symbol
+    end
+  end
+    
 end
-
-
