@@ -1,9 +1,8 @@
 require '../tic-tac-toe.rb'
 
-describe Player do 
-  subject(:row) {described_class.new('Johnny', 'X')}
-  
+describe Player do   
   describe 'select_row' do
+    subject(:row) {described_class.new('Johnny', 'X')}
   context 'when user inputs an invalid row choice and then a valid row choice' do
     before do
       invalid = 'a'
@@ -21,7 +20,9 @@ describe Player do
         row.select_row
       end
     end
+  end
 
-  
+  describe 'select_column' do
+    subject(:column) {described_class.new('Johnny', 'X')}
   end
 end
