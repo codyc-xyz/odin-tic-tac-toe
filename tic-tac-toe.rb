@@ -45,22 +45,14 @@ class TicTacToe
     @board = Array.new(3) {Array.new(3)}
   end
 
-  def player_one_select_row
+  def player_one_select_square
     row = @player_one.select_row
-    player_one_select_column(row)
-  end
-
-  def player_two_select_row
-    row = @player_two.select_row
-    player_two_select_column(row)
-  end
-
-  def player_one_select_column(row)
     column = @player_one.select_column
     player_one_place_symbol(row, column)
   end
 
-  def player_two_select_column(row)
+  def player_two_select_square
+    row = @player_two.select_row
     column = @player_two.select_column
     player_two_place_symbol(row, column)
   end
@@ -73,7 +65,7 @@ class TicTacToe
     else
       puts 'That board position is already full, please select an empty position'
       puts "#{@board}"
-      player_one_select_row
+      player_one_select_square
     end
   end
 
@@ -85,7 +77,7 @@ class TicTacToe
     else
       puts 'That board position is already full, please select an empty position'
       puts "#{@board}"
-      player_two_select_row
+      player_two_select_square
     end
   end  
   
