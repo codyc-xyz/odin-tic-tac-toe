@@ -38,9 +38,7 @@ class TicTacToe
   attr_accessor :board
   
   def initialize (player_one_name, player_one_symbol, player_two_name, player_two_symbol)
-    @player_one_name = player_one_name
     @player_one_symbol = player_one_symbol
-    @player_two_name = player_two_name
     @player_two_symbol = player_two_symbol
     @player_one = Player.new(player_one_name, player_one_symbol)
     @player_two = Player.new(player_two_name, player_two_symbol)
@@ -48,33 +46,48 @@ class TicTacToe
   end
 
   def player_one_select_row
-    @player_one.select_row
+    row = @player_one.select_row
+    player_one_select_column(row)
   end
 
   def player_two_select_row
-    @player_two.select_row
+    row = @player_two.select_row
+    player_two_select_column(row)
   end
 
-  def player_one_select_column
-    @player_one.select_column
+  def player_one_select_column(row)
+    column = @player_one.select_column
+    player_one_place_symbol(row, column)
   end
 
-  def player_two_select_column
-    @player_two.select_column
+  def player_two_select_column(row)
+    column = @player_two.select_column
+    player_two_place_symbol(row, column)
   end
 
-  def player_one_place_symbol 
-    player_one_row = self.player_one_select_row
-    player_one_column = self.player_one_select_column
-
-    if @board[player_one_row][player_one_column].nil?
-      @board[player_one_row][player_one_column] = @player_one_symbol
+  def player_one_place_symbol(row, column) 
+   
+    if @board[row][column].nil?
+      @board[row][column] = @player_one_symbol
       puts "#{@board}"
     else
       puts 'That board position is already full, please select an empty position'
       puts "#{@board}"
-      player_one_place_symbol
+      player_one_select_row
     end
   end
+
+  def player_two_place_symbol(row, column) 
+   
+    if @board[row][column].nil?
+      @board[row][column] = @player_two_symbol
+      puts "#{@board}"
+    else
+      puts 'That board position is already full, please select an empty position'
+      puts "#{@board}"
+      player_two_select_row
+    end
+  end  
+  
     
 end

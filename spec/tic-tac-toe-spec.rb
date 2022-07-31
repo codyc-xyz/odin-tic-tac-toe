@@ -50,22 +50,32 @@ describe TicTacToe do
     subject(:game_board) {described_class.new('Johnny', 'X', 'Bob', 'O')}
 
     context 'when user has submitted a valid row and column selection and that board position is empty' do
-      before do
-        valid_row = 2
-        valid_column = 2
-        allow(game_board).to receive(:player_one_select_row).and_return(valid_row)
-        allow(game_board).to receive(:player_one_select_column).and_return(valid_column)
-      end
-  
-      it 'changes the user\'s chosen board position from nil to their symbol' do
-       
+    
+      it 'changes the user\'s chosen board position from nil to the user\'s symbol' do
+        row = 2
+        column = 2
         symbol = game_board.instance_variable_get(:@player_one_symbol)
         board = game_board.instance_variable_get(:@board)
-        expect(board[2][2]).to eq(nil)
-        game_board.player_one_place_symbol
-        expect(board[2][2]).to eq(symbol)
- 
-        
+        expect(board[row][column]).to eq(nil)
+        game_board.player_one_place_symbol(row, column)
+        expect(board[row][column]).to eq(symbol)     
+      end
+    end
+
+    context 'when user has submitted a valid row and column selection but that board position is not empty' do
+      before do
+        allow(game_board).to receive(:player_two_place_symbol).and_return(nil)
+      end
+     
+      it 'does not change the symbol of the chosen board position to the user\'s symbol' do
+        row = 2
+        column = 2
+        symbol = game_board.instance_variable_get(:@player_one_symbol)
+        board = game_board.instance_variable_get(:@board)
+        game_board.player_one_place_symbol(row, column)
+        expect(board[row][column]).to eq(symbol)    
+        game_board.player_two_place_symbol(row, column)
+        expect(board[row][column]).to eq(symbol)   
       end
     end
   end
