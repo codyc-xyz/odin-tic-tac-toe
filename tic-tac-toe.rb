@@ -65,7 +65,7 @@ class TicTacToe
     else
       puts 'That board position is already full, please select an empty position'
       puts "#{@board}"
-      player_one_select_square
+      false
     end
   end
 
@@ -74,10 +74,10 @@ class TicTacToe
     if @board[row][column].nil?
       @board[row][column] = @player_two_symbol
       puts "#{@board}"
-    else
-      puts 'That board position is already full, please select an empty position'
+    elsif !@board[row][column].nil?
+      puts "That board position is already full, please select an empty position"
       puts "#{@board}"
-      player_two_select_square
+      false
     end
   end  
   

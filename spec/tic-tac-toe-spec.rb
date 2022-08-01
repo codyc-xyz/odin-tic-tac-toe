@@ -67,10 +67,19 @@ describe TicTacToe do
       it 'does not change the board state' do
       row = 2
       column = 2
-      board =  [[nil, nil, nil], [nil, nil, nil], [nil, nil, 'O']] 
+      board = game_board.instance_variable_get(:@board)
+      board[2][2]= 'O'
       game_board.player_one_place_symbol(row, column, board)
       expect(board[row][column]).to eq('O')
-     
+    end
+
+    it 'returns an error message and prints the board' do
+      row = 2
+      column = 2
+      board = game_board.instance_variable_get(:@board)
+      board[2][2]= 'O'
+      error_message = "That board position is already full, please select an empty position\n#{board}\n"
+      expect{game_board.player_one_place_symbol(row, column, board)}.to output(error_message).to_stdout
     end
   end
 end
