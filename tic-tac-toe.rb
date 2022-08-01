@@ -47,18 +47,22 @@ class TicTacToe
     @board = Array.new(3) {Array.new(3)}
   end
 
-  def player_one_select_square
+  def player_one_turn
     row = @player_one.select_row
     column = @player_one.select_column
     symbol = @player_one_symbol
     place_symbol(row, column, symbol)
+    name = @player_one_name
+    winner?(name, symbol)
   end
 
-  def player_two_select_square
+  def player_two_turn
     row = @player_two.select_row
     column = @player_two.select_column
     symbol = @player_two_symbol
     place_symbol(row, column, symbol)
+    name = @player_two_name
+    winner?(name, symbol)
   end
 
   def place_symbol(row, column, symbol, board = @board) 
@@ -73,6 +77,20 @@ class TicTacToe
     end
   end
 
+  def winner?(name, symbol, board = @board)
+      if 
+       board[0][0] == symbol && board[0][1] == symbol && board[0][2] == symbol ||
+       board[0][0] == symbol && board[1][0] == symbol && board[2][0] == symbol ||
+       board[1][0] == symbol && board[1][1] == symbol && board[1][2] == symbol ||
+       board[2][0] == symbol && board[2][1] == symbol && board[2][2] == symbol ||
+       board[0][1] == symbol && board[1][1] == symbol && board[2][1] == symbol ||
+       board[0][2] == symbol && board[1][2] == symbol && board[2][2] == symbol ||
+       board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol ||
+       board[2][0] == symbol && board[1][1] == symbol && board[0][2] == symbol
+       puts "Congratulations #{name}, You have won!"
+       true
+      end
+  end
   
   
     
