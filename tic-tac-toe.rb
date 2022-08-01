@@ -47,32 +47,14 @@ class TicTacToe
     @board = Array.new(3) {Array.new(3)}
   end
 
-  def player_one_turn
-    row = @player_one.select_row
-    column = @player_one.select_column
-    symbol = @player_one_symbol
-    place_symbol(row, column, symbol)
-    name = @player_one_name
-    winner?(name, symbol)
-  end
-
-  def player_two_turn
-    row = @player_two.select_row
-    column = @player_two.select_column
-    symbol = @player_two_symbol
-    place_symbol(row, column, symbol)
-    name = @player_two_name
-    winner?(name, symbol)
-  end
-
   def place_symbol(row, column, symbol, board = @board) 
    
-    if @board[row][column].nil?
-      @board[row][column] = symbol
-      puts "#{@board}"
+    if board[row][column].nil?
+      board[row][column] = symbol
+      puts "#{board}"
     else
       puts 'That board position is already full, please select an empty position'
-      puts "#{@board}"
+      puts "#{board}"
       false
     end
   end
@@ -91,7 +73,58 @@ class TicTacToe
        true
       end
   end
+
+  def player_one_turn
+    row = @player_one.select_row
+    column = @player_one.select_column
+    symbol = @player_one_symbol
+    if place_symbol(row, column, symbol) == false
+      player_one_turn
+    else
+    name = @player_one_name
+    winner?(name, symbol)
+    end
+  end
+
+  def player_two_turn
+    row = @player_two.select_row
+    column = @player_two.select_column
+    symbol = @player_two_symbol
+    if place_symbol(row, column, symbol) == false
+      player_two_turn
+    else
+    name = @player_two_name
+    winner?(name, symbol)
+    end
+  end
   
-  
+  def play
+    i = 0
+    loop do
+    if player_one_turn == true
+      break
+    else
+      i += 1
+    end
+
+    if i == 9
+      puts "This game has tied, please restart if you would like to play again!"
+      break
+    end
     
+    if player_two_turn == true
+      break
+    else
+      i += 1
+    end
+
+    if i == 9
+      puts "This game has tied, please restart if you would like to play again!"
+      break
+      end
+    end 
+  end
 end
+
+game = TicTacToe.new
+game.play
