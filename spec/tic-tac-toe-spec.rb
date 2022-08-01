@@ -99,7 +99,7 @@ end
         board[0][0] = symbol
         board[0][1] = symbol
         board[0][2] = symbol
-        expect{game_board.winner?(board)}.to output(winner_message)
+        expect{game_board.winner?(name, symbol, board)}.to output(winner_message).to_stdout
       end
     end
 
@@ -113,7 +113,7 @@ end
         board[0][0] = symbol
         board[1][0] = symbol
         board[2][0] = symbol
-        expect{game_board.winner?(board)}.to output(winner_message)
+        expect{game_board.winner?(name, symbol, board)}.to output(winner_message).to_stdout
       end
     end
 
@@ -127,7 +127,7 @@ end
         board[0][0] = symbol
         board[1][1] = symbol
         board[2][2] = symbol
-        expect{game_board.winner?(board)}.to output(winner_message)
+        expect{game_board.winner?(name, symbol, board)}.to output(winner_message).to_stdout
       end
     end
   end
