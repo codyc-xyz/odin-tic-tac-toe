@@ -37,7 +37,7 @@ class TicTacToe
   attr_reader :player_one, :player_two, :player_one_name, :player_one_symbol, :player_two_name, :player_two_symbol
   attr_accessor :board
   
-  def initialize (player_one_name, player_one_symbol, player_two_name, player_two_symbol)
+  def initialize (player_one_name = 'Johnny', player_one_symbol = 'X', player_two_name = 'Bob', player_two_symbol = 'O')
     @player_one_symbol = player_one_symbol
     @player_two_symbol = player_two_symbol
     @player_one = Player.new(player_one_name, player_one_symbol)
@@ -57,7 +57,7 @@ class TicTacToe
     player_two_place_symbol(row, column)
   end
 
-  def player_one_place_symbol(row, column) 
+  def player_one_place_symbol(row, column, board = @board) 
    
     if @board[row][column].nil?
       @board[row][column] = @player_one_symbol
@@ -69,7 +69,7 @@ class TicTacToe
     end
   end
 
-  def player_two_place_symbol(row, column) 
+  def player_two_place_symbol(row, column, board = @board) 
    
     if @board[row][column].nil?
       @board[row][column] = @player_two_symbol

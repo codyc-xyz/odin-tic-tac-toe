@@ -62,23 +62,29 @@ describe TicTacToe do
       end
     end
 
-    context 'when user has submitted a valid row and column selection but that board position is not empty' do
-      before do
-        allow(game_board).to receive(:player_two_place_symbol).and_return(nil)
-      end
+    context 'when chosen board position is not empty' do
+
+      it 'does not change the board state' do
+      row = 2
+      column = 2
+      board =  [[nil, nil, nil], [nil, nil, nil], [nil, nil, 'O']] 
+      game_board.player_one_place_symbol(row, column, board)
+      expect(board[row][column]).to eq('O')
      
-      it 'does not change the symbol of the chosen board position to the user\'s symbol' do
-        row = 2
-        column = 2
-        symbol = game_board.instance_variable_get(:@player_one_symbol)
-        board = game_board.instance_variable_get(:@board)
-        game_board.player_one_place_symbol(row, column)
-        expect(board[row][column]).to eq(symbol)    
-        game_board.player_two_place_symbol(row, column)
-        expect(board[row][column]).to eq(symbol)   
-      end
     end
   end
+end
+
+  # describe 'winner?' do
+  #   subject(:game_board) {described_class.new('Johnny', 'X', 'Bob', 'O')}
+
+  #   context 'when a user has completed a horizontal row of three symbols' do
+
+  #     it 'causes that player to win, and the game to end' do
+  #       symbol_one = game_board.instance_variable_get(:@player_one_symbol)
+        
+
+
 end
         
         
