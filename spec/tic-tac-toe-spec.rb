@@ -47,7 +47,7 @@ end
 
 describe TicTacToe do
   describe 'place_symbol' do
-    subject(:game_board) {described_class.new('Johnny', 'X', 'Bob', 'O')}
+    subject(:game_board) {described_class.new}
 
     context 'when user has submitted a valid row and column selection and that board position is empty' do
     
@@ -57,7 +57,7 @@ describe TicTacToe do
         symbol = game_board.instance_variable_get(:@player_one_symbol)
         board = game_board.instance_variable_get(:@board)
         expect(board[row][column]).to eq(nil)
-        game_board.player_one_place_symbol(row, column)
+        game_board.place_symbol(row, column, symbol)
         expect(board[row][column]).to eq(symbol)     
       end
     end
@@ -67,32 +67,70 @@ describe TicTacToe do
       it 'does not change the board state' do
       row = 2
       column = 2
+      symbol = game_board.instance_variable_get(:@player_one_symbol)
       board = game_board.instance_variable_get(:@board)
-      board[2][2]= 'O'
-      game_board.player_one_place_symbol(row, column, board)
+      board[row][column]= 'O'
+      game_board.place_symbol(row, column, symbol, board)
       expect(board[row][column]).to eq('O')
     end
 
     it 'returns an error message and prints the board' do
       row = 2
       column = 2
+      symbol = game_board.instance_variable_get(:@player_one_symbol)
       board = game_board.instance_variable_get(:@board)
-      board[2][2]= 'O'
+      board[row][column]= 'O'
       error_message = "That board position is already full, please select an empty position\n#{board}\n"
-      expect{game_board.player_one_place_symbol(row, column, board)}.to output(error_message).to_stdout
+      expect{game_board.place_symbol(row, column, symbol, board)}.to output(error_message).to_stdout
     end
   end
 end
 
-  # describe 'winner?' do
-  #   subject(:game_board) {described_class.new('Johnny', 'X', 'Bob', 'O')}
+  describe 'winner?' do
+    subject(:game_board) {described_class.new}
 
-  #   context 'when a user has completed a horizontal row of three symbols' do
+    context 'when a user has completed a horizontal row of three symbols' do
 
-  #     it 'causes that player to win, and the game to end' do
-  #       symbol_one = game_board.instance_variable_get(:@player_one_symbol)
-        
+      it 'causes that player to win, and the game to end' do
+        board = game_board.instance_variable_get(:@board)
+        symbol = game_board.instance_variable_get(:@player_one_symbol)
+        name = game_board.instance_variable_get(:@player_one_name)
+        winner_message = "Congratulations #{name}, You have won!\n"
+        board[0][0] = symbol
+        board[0][1] = symbol
+        board[0][2] = symbol
+        expect{game_board.winner?(board)}.to output(winner_message)
+      end
+    end
 
+    context 'when a user has completed a vertical row of three symbols' do
+
+      it 'causes that player to win, and the game to end' do
+        board = game_board.instance_variable_get(:@board)
+        symbol = game_board.instance_variable_get(:@player_two_symbol)
+        name = game_board.instance_variable_get(:@player_two_name)
+        winner_message = "Congratulations #{name}, You have won!\n"
+        board[0][0] = symbol
+        board[1][0] = symbol
+        board[2][0] = symbol
+        expect{game_board.winner?(board)}.to output(winner_message)
+      end
+    end
+
+    context 'when a user has completed a diagonal row of three symbols' do
+
+      it 'causes that player to win, and the game to end' do
+        board = game_board.instance_variable_get(:@board)
+        symbol = game_board.instance_variable_get(:@player_one_symbol)
+        name = game_board.instance_variable_get(:@player_one_name)
+        winner_message = "Congratulations #{name}, You have won!\n"
+        board[0][0] = symbol
+        board[1][1] = symbol
+        board[2][2] = symbol
+        expect{game_board.winner?(board)}.to output(winner_message)
+      end
+    end
+  end
 
 end
         

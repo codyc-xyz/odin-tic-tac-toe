@@ -38,7 +38,9 @@ class TicTacToe
   attr_accessor :board
   
   def initialize (player_one_name = 'Johnny', player_one_symbol = 'X', player_two_name = 'Bob', player_two_symbol = 'O')
+    @player_one_name = player_one_name
     @player_one_symbol = player_one_symbol
+    @player_two_name = player_two_name
     @player_two_symbol = player_two_symbol
     @player_one = Player.new(player_one_name, player_one_symbol)
     @player_two = Player.new(player_two_name, player_two_symbol)
@@ -48,19 +50,21 @@ class TicTacToe
   def player_one_select_square
     row = @player_one.select_row
     column = @player_one.select_column
-    player_one_place_symbol(row, column)
+    symbol = @player_one_symbol
+    place_symbol(row, column, symbol)
   end
 
   def player_two_select_square
     row = @player_two.select_row
     column = @player_two.select_column
-    player_two_place_symbol(row, column)
+    symbol = @player_two_symbol
+    place_symbol(row, column, symbol)
   end
 
-  def player_one_place_symbol(row, column, board = @board) 
+  def place_symbol(row, column, symbol, board = @board) 
    
     if @board[row][column].nil?
-      @board[row][column] = @player_one_symbol
+      @board[row][column] = symbol
       puts "#{@board}"
     else
       puts 'That board position is already full, please select an empty position'
@@ -69,17 +73,7 @@ class TicTacToe
     end
   end
 
-  def player_two_place_symbol(row, column, board = @board) 
-   
-    if @board[row][column].nil?
-      @board[row][column] = @player_two_symbol
-      puts "#{@board}"
-    elsif !@board[row][column].nil?
-      puts "That board position is already full, please select an empty position"
-      puts "#{@board}"
-      false
-    end
-  end  
+  
   
     
 end
