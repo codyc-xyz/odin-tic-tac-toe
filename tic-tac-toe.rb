@@ -49,8 +49,8 @@ class TicTacToe
 
   def place_symbol(row, column, symbol, board = @board)
     if board[row][column].nil?
-      board[row][column] = symbol
-      puts "#{board}"
+      @board[row][column] = symbol
+      puts "#{@board}"
     else
       puts 'That board position is already full, please select an empty position'
       puts "#{board}"
